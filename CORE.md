@@ -28,6 +28,11 @@
 
 ### Work Registry
 
+#### Poppy
+- path: `work/poppy.md`
+- role: Poppy 반려견 행동·감정 추론 웹 프로토타입의 업무 기억 원본
+- contains: 목표, 요구사항, 아키텍처·기술 결정, 구현·검증 상태, 보안 주의점, 다음 작업
+
 <!-- 새 프로젝트에 등록된 실제 Work가 생기면 아래 예시 형식으로 작성한다.
 #### 프로젝트 이름
 - path: `work/project-a.md`

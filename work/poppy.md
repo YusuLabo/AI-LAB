@@ -73,10 +73,11 @@
 
 2026-09-29 확인 기준:
 - 기본 브랜치: `main`
-- main commit: `930d1ec6ca17e0a719b8d9dec9596cbfbc54ea7a`
+- main commit: `f9ee9dd52ff1fba1cfddb0b71e23f250e49ca4d1`
 - 초기 기능 구현 기준 커밋: `a83023125c8f01f70df5225712e85b3693679cb9` (`feat: add Dog Mind prototype v1`)
 - 2026-09-29 프론트 UI 리디자인 반영: 따뜻한 크림 배경, 오렌지/코랄 + 바이올렛 포인트, 반투명 카드, 홈/인증/내비/분석/강아지 관리/기록 화면의 시각 계층과 반응형 레이아웃 개선
 - Tailwind CSS 4.1 기준 선형 그라디언트 유틸리티를 `bg-linear-*` 형식으로 정리
+- `package.json`에 `postinstall: prisma generate`를 추가해 새 clone 후 `npm install` 시 Prisma Client가 자동 생성되도록 변경
 - UI 변경은 GitHub 반영 및 변경 파일 diff까지 확인했으며 로컬 브라우저 렌더링/빌드는 아직 미검증
 
 주요 구현 범위:

@@ -81,7 +81,10 @@
 - `package.json`에 `postinstall: prisma generate`를 추가해 새 clone 후 `npm install` 시 Prisma Client가 자동 생성되도록 변경
 - 사용자 로컬 브라우저에서 앱 페이지 렌더링은 확인됐으나 Tailwind 유틸리티가 전혀 적용되지 않는 상태가 발견됨
 - 원인: Tailwind CSS 4용 `@tailwindcss/postcss` / `postcss` 의존성과 루트 `postcss.config.mjs`가 누락되어 `@import "tailwindcss"`만으로는 유틸리티 CSS가 빌드되지 않았음
-- 공식 Tailwind Next.js 설치 방식에 맞춰 `@tailwindcss/postcss`, `postcss`를 추가하고 `postcss.config.mjs`에 플러그인을 등록함. GitHub 반영은 확인했으나 수정 후 로컬 렌더링은 아직 미검증
+- 공식 Tailwind Next.js 설치 방식에 맞춰 `@tailwindcss/postcss`, `postcss`를 추가하고 루트 `postcss.config.mjs`에 `@tailwindcss/postcss` 플러그인을 등록함
+- 위 Tailwind 파이프라인 수정은 GitHub main `a7275497ec58d4981dd2887024df7447e041e7ff`까지 반영 확인. 수정 후 사용자의 로컬 `npm install` + 재렌더링은 아직 미검증
+- 새 clone 직후 Prisma Client가 없어 `@/generated/prisma/client` 모듈 오류가 발생했으며, 재발 방지를 위해 `postinstall: prisma generate`를 추가함
+- 새 로컬 DB에서는 `main.Session` 테이블이 없어 런타임 오류가 발생했으며, 신규 환경에서 migration 적용(`npm run db:deploy`)이 필요함을 확인. 이후 앱 페이지 자체 렌더링은 확인됨
 
 주요 구현 범위:
 - 회원가입/로그인
@@ -106,8 +109,10 @@
 
 - Node.js: `v24.21.0`
 - FFmpeg: `9.0.2-essentials_build-www.gyan.dev`
-- 프로젝트 위치: `C:\dev\Poppy-main`
+- 초기 ZIP 기반 프로젝트 위치: `C:\dev\Poppy-main`
+- Git 설치 후 새 clone 작업 위치: `C:\dev\Poppy`
 - `npm install` 실행 완료
+- `npm run dev`로 Next.js 개발 서버가 실제 기동되고 브라우저에서 앱 페이지 렌더링까지 확인
 - `npm run db:generate` 성공
   - `prisma7.config.ts` 로드 확인
   - `prisma/schema.prisma` 로드 확인
@@ -121,6 +126,7 @@
 
 ### 아직 미검증
 
+- Tailwind PostCSS 수정 후 `C:\dev\Poppy`에서 `git pull` → `npm install` → `npm run dev` 실행 시 관리 패널형 UI가 의도대로 스타일링되는지
 - 브라우저에서 회원가입/로그인 흐름이 정상 동작하는지
 - 강아지 프로필 생성/수정이 정상 동작하는지
 - 실제 사진 1장 분석이 OpenAI API까지 end-to-end로 성공하는지
@@ -141,14 +147,16 @@
 
 가장 가까운 다음 단계는 다음 순서다.
 
-1. 로컬에서 최신 pull 후 `npm install`로 새 Tailwind PostCSS 의존성을 설치하고 `npm run dev` 재시작.
-2. 홈 화면에서 흰 카드/그리드/라운드/버튼 등 Tailwind 유틸리티가 실제 적용되는지 확인.
-3. 브라우저에서 홈/로그인/분석/내 강아지/기록 화면의 실제 렌더링 및 모바일 반응형 확인.
-4. 회원가입 → 로그인 → 강아지 프로필 등록 확인.
-5. 사진 1장으로 첫 OpenAI 실제 분석 테스트.
-6. 성공 후 30초 이하 짧은 영상으로 FFmpeg 프레임 추출 포함 통합 테스트.
-7. 실패 항목을 수정하고 반복 검증.
-8. 핵심 기능이 안정되면 품종 지식 DB의 출처/범위 확장과 UI 세부 조정 진행.
+1. `C:\dev\Poppy`에서 `git pull`.
+2. `npm install`로 새 `@tailwindcss/postcss` / `postcss` 의존성을 설치.
+3. `npm run dev` 재시작 후 홈 화면에서 흰 카드, 그리드, 작은 라운드, 파란 버튼 등 Tailwind 유틸리티가 실제 적용되는지 확인.
+4. 레퍼런스 이미지와 실제 렌더링을 비교해 관리 패널형 UI의 간격·크기·색·테이블 구조를 2차 조정.
+5. 브라우저에서 홈/로그인/분석/내 강아지/기록 화면의 실제 렌더링 및 모바일 반응형 확인.
+6. 회원가입 → 로그인 → 강아지 프로필 등록 확인.
+7. 사진 1장으로 첫 OpenAI 실제 분석 테스트.
+8. 성공 후 30초 이하 짧은 영상으로 FFmpeg 프레임 추출 포함 통합 테스트.
+9. 실패 항목을 수정하고 반복 검증.
+10. 핵심 기능이 안정되면 품종 지식 DB의 출처/범위 확장 진행.
 
 ## 8. 보안/비밀 정보
 

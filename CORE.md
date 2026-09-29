@@ -8,7 +8,7 @@
 - `CORE.md`: Work / Skill / System 파일의 경로, 역할(`role`), 포함 정보의 종류(`contains`) 및 필요한 연결을 안내한다.
 - `work/`: 해당 프로젝트의 실제 목표, 요구사항, 의사결정, 진행 상태, 검증 결과, 다음 작업을 저장한다.
 - `skills/`: 여러 Work에서 재사용할 수 있는 작업 수행 절차를 둔다. Work의 개별 진행 상태를 저장하지 않는다.
-- `system/`: 기억 저장소의 추가·갱신·삭제 및 충돌·승인 규칙을 둔다.
+- `system/`: 프로젝트 전반에 적용되는 운영·협업 정책과 기억 저장소의 추가·갱신·삭제 및 충돌·승인 규칙을 둔다.
 - 새로운 최상위 영역은 실제 요구가 생기고 사용자 확인이 이루어진 경우에만 추가한다.
 
 **CORE에 저장하지 않는 정보:** 개별 프로젝트의 현재 목표·진행 단계·다음 작업·설계 상세·사용자 성향·실제 테스트 결과. 해당 정보의 담당 Work가 원본이다.
@@ -17,20 +17,16 @@
 
 1. 프로젝트 관련 작업을 시작하면 먼저 CORE를 읽는다. 단, 최초 CORE 위치는 외부 ChatGPT 프로젝트 지침(Bootstrap)이 제공한다.
 2. 요청과 관련된 Registry 항목만 선택한다. CORE를 읽었다고 모든 하위 MD를 읽지는 않는다.
-3. 필요하면 Work와 Skill을 함께 읽는다. **Work = 맥락과 실제 기억**, **Skill = 실행 절차**다.
-4. 기억을 추가·갱신·삭제해야 할 경우에만 `system/memory-policy.md`를 추가로 읽고 해당 규칙을 따른다.
-5. 현재 대화에서 사용자가 새로 명시한 확정 내용은 이전 기록보다 우선한다. 해당 주제의 원본 Work 내용이 CORE의 설명보다 상세한 기준이며, 충돌을 발견하면 별도로 보고한다.
+3. 필요하면 Work, Skill, System을 함께 읽는다. **Work = 맥락과 실제 기억**, **Skill = 실행 절차**, **System = 프로젝트 전반의 운영·협업 정책**이다.
+4. 개발 관련 인터뷰·요구사항·설계·구현·검토 작업에서는 `system/development-collaboration-policy.md`를 관련 System 정책으로 읽고 적용한다.
+5. 기억을 추가·갱신·삭제해야 할 경우에만 `system/memory-policy.md`를 추가로 읽고 해당 규칙을 따른다.
+6. 현재 대화에서 사용자가 새로 명시한 확정 내용은 이전 기록보다 우선한다. 해당 주제의 원본 Work 내용이 CORE의 설명보다 상세한 기준이며, 충돌을 발견하면 별도로 보고한다.
 
 ## 3. Registry 규격 — 표준 Markdown 블록 (확정)
 
 각 항목에 `path`, `role`, `contains`를 작성한다. `contains`에는 **기억의 실질적 값이 아니라 정보의 종류**만 적는다. `related_skills`는 이미 확정된 의존·반복 사용 관계가 있을 때만 추가한다.
 
 ### Work Registry
-
-#### AI 개발 협업 컨텍스트
-- path: `work/ai-development-context.md`
-- role: 사용자의 개발 협업 성향과 AI 행동 기준을 유지·고도화하는 Work 원본
-- contains: 개발 협업 목표, 인터뷰 기반 행동 기준, 선택·추천 기준, 구현·검증·보고 방식, 고도화 원칙
 
 <!-- 새 프로젝트에 등록된 실제 Work가 생기면 아래 예시 형식으로 작성한다.
 #### 프로젝트 이름
@@ -50,6 +46,12 @@
 -->
 
 ### System Registry
+
+#### Development Collaboration Policy
+- path: `system/development-collaboration-policy.md`
+- role: 프로젝트 전반의 개발 협업에서 AI가 따라야 할 기본 행동·판단 정책
+- contains: 인터뷰 방식, 선택·추천 기준, 비판·검증 강도, 조사·기술 선택, 구현·프로토타이핑, 테스트·보고 방식
+- applies: 개발 관련 인터뷰, 요구사항, 설계, 구현, 검토 작업 전반
 
 #### Memory Policy
 - path: `system/memory-policy.md`

@@ -27,6 +27,11 @@
 
 ### Work Registry
 
+#### AI 개발 협업 컨텍스트
+- path: `work/ai-development-context.md`
+- role: 사용자의 개발 협업 성향과 AI 행동 기준을 유지·고도화하는 Work 원본
+- contains: 개발 협업 목표, 인터뷰 기반 행동 기준, 선택·추천 기준, 구현·검증·보고 방식, 고도화 원칙
+
 <!-- 새 프로젝트에 등록된 실제 Work가 생기면 아래 예시 형식으로 작성한다.
 #### 프로젝트 이름
 - path: `work/project-a.md`
